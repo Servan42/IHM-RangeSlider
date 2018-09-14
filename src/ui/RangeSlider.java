@@ -4,6 +4,21 @@ import javax.swing.JSlider;
 
 public class RangeSlider extends JSlider implements _RangeSlider {
 
+	private int max;
+	private int min;
+	private int lowerBound;
+	private int upperBound;
+	
+	public RangeSlider(int min, int max, int lowerBound, int upperBound) throws Exception{
+		if(min > max || upperBound > max || upperBound < min){
+			throw new Exception("Incorrect Slider values in constructor.");
+		}
+		this.max = max;
+		this.min = min;
+		this.lowerBound = lowerBound;
+		this.upperBound = upperBound;
+	}
+	
 	/**
 	 * 
 	 */

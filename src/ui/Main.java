@@ -16,7 +16,11 @@ public class Main {
 			}
 		});
 
-		frame.getContentPane().add(new RangeSlider());
+		try {
+			frame.getContentPane().add(new RangeSlider(0,10,5,6));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		frame.setVisible(true);
 	}
 }
