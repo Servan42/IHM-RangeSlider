@@ -1,8 +1,13 @@
 package ui;
 
-import javafx.scene.control.Slider;
+import javax.swing.JSlider;
 
-public class RangeSlider extends Slider implements _RangeSlider {
+public class RangeSlider extends JSlider implements _RangeSlider {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void addChangeListener(_ChangeListener x) {

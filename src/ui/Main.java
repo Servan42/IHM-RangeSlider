@@ -1,18 +1,15 @@
 package ui;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+import javax.swing.JFrame;
 
-public class Main extends Application {
+public class Main {
 	
-	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		JFrame frame = new JFrame();
+		frame.setTitle("RangeSlider");
+		frame.setSize(800, 600);
+		frame.getContentPane().add(new RangeSlider());
+		frame.setVisible(true);
 	}
 }
