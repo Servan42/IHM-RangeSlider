@@ -1,6 +1,8 @@
 package ui;
 
-public class RangeSlider implements _RangeSlider {
+import javafx.scene.control.Slider;
+
+public class RangeSlider extends Slider implements _RangeSlider {
 
 	@Override
 	public void addChangeListener(_ChangeListener x) {
