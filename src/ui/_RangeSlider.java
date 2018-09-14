@@ -10,9 +10,9 @@ public interface _RangeSlider {
 
 	public int getUpperBound();
 
-	public void setMaximum(int max) throws Exception;
+	public void setMaximum(int max);
 
-	public void setMinimum(int min) throws Exception;
+	public void setMinimum(int min);
 
 	public void setLowerBound(int lowerBound);
 

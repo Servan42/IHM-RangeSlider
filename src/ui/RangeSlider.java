@@ -45,11 +45,9 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 	}
 
 	@Override
-	public void setMaximum(int max) throws Exception {
-		if (max < min)
-			throw new Exception("INCORRECT_MAX_GIVEN");
-
-		this.max = max;
+	public void setMaximum(int max){
+		if (max >= min)
+			this.max = max;
 		if (max < upperBound)
 			upperBound = max;
 		if (max < lowerBound)
@@ -57,11 +55,9 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 	}
 
 	@Override
-	public void setMinimum(int min) throws Exception {
-		if (min > max)
-			throw new Exception("INCORRECT_MIN_GIVEN");
-
-		this.min = min;
+	public void setMinimum(int min){
+		if (min <= max)
+			this.min = min;
 		if (min > upperBound)
 			upperBound = min;
 		if (min > lowerBound)
