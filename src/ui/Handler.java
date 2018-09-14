@@ -7,6 +7,7 @@ public class Handler {
 	
 	private State state;
 	private RangeSlider rangeSlider;
+	private boolean heldBound; // true = max, false = min
 	
 	public void Handle(MouseEvent e) {
 		switch(state) {

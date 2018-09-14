@@ -5,63 +5,67 @@ import javafx.scene.control.Slider;
 public class RangeSlider extends Slider implements _RangeSlider {
 
 	@Override
-	public void addChangeListener(_ChangeListener x) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public int getMaximum() {
-		// TODO Auto-generated method stub
-		return 0;
+		return max;
 	}
 
 	@Override
 	public int getMinimum() {
-		// TODO Auto-generated method stub
-		return 0;
+		return min;
 	}
 
 	@Override
 	public int getLowerBound() {
-		// TODO Auto-generated method stub
-		return 0;
+		return lowerBound;
 	}
 
 	@Override
 	public int getUpperBound() {
-		// TODO Auto-generated method stub
-		return 0;
+		return upperBound;
 	}
 
 	@Override
-	public void removeChangeListener(_ChangeListener x) {
-		// TODO Auto-generated method stub
+	public void setMaximum(int max) throws Exception {
+		if (max < min)
+			throw new Exception("INCORRECT_MAX_GIVEN");
 
+		this.max = max;
+		if (max < upperBound)
+			upperBound = max;
+		if (max < lowerBound)
+			lowerBound = max;
 	}
 
 	@Override
-	public void setMaximum(int max) {
-		// TODO Auto-generated method stub
+	public void setMinimum(int min) throws Exception {
+		if (min > max)
+			throw new Exception("INCORRECT_MIN_GIVEN");
 
-	}
-
-	@Override
-	public void setMinimum(int min) {
-		// TODO Auto-generated method stub
-
+		this.min = min;
+		if (min > upperBound)
+			upperBound = min;
+		if (min > lowerBound)
+			lowerBound = min;
 	}
 
 	@Override
 	public void setLowerBound(int lowerBound) {
-		// TODO Auto-generated method stub
-
+		if (lowerBound < min)
+			this.lowerBound = min;
+		else if (lowerBound > upperBound)
+			this.lowerBound = upperBound;
+		else
+			this.lowerBound = lowerBound;
 	}
 
 	@Override
 	public void setUpperBound(int upperBound) {
-		// TODO Auto-generated method stub
-
+		if (upperBound > max)
+			this.upperBound = max;
+		else if (upperBound < lowerBound)
+			this.upperBound = lowerBound;
+		else
+			this.upperBound = upperBound;
 	}
 
 }
