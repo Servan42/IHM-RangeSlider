@@ -11,7 +11,7 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 	
 	public RangeSlider(int min, int max, int lowerBound, int upperBound) throws Exception{
 		if(min > max || upperBound > max || upperBound < min){
-			throw new Exception("Incorrect Slider values in constructor.");
+			throw new Exception("ERROR : Incorrect Slider values in constructor.");
 		}
 		this.max = max;
 		this.min = min;
