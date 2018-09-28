@@ -1,4 +1,4 @@
-# IHM TP1 : RangeSLider
+# IHM TP1 : RangeSlider
 
 ## Members
 
