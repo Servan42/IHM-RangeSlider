@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -48,8 +49,11 @@ public class Main {
 				}
 			});
 			
+			slider.removeMouseMotionListener(slider.getMouseMotionListeners()[0]);
 			slider.removeMouseListener(slider.getMouseListeners()[0]);
-			slider.addMouseListener(new EventHandler());
+			EventHandler handler = new EventHandler();
+			slider.addMouseListener(handler);
+			slider.addMouseMotionListener(handler);
 			p.add(slider);
 		} catch (Exception e1) {
 			e1.printStackTrace();
