@@ -2,6 +2,8 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -45,6 +47,9 @@ public class Main {
 					label.setText("Current value : " + new Integer(slider.getValue()).toString());
 				}
 			});
+			
+			slider.removeMouseListener(slider.getMouseListeners()[0]);
+			slider.addMouseListener(new EventHandler());
 			p.add(slider);
 		} catch (Exception e1) {
 			e1.printStackTrace();

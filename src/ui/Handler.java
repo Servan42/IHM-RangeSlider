@@ -1,7 +1,10 @@
 package ui;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicSliderUI.TrackListener;
 
 public class Handler {
@@ -47,5 +50,4 @@ public class Handler {
 		default:;
 		}
 	}
-	
 }
