@@ -17,6 +17,7 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 		this.min = min;
 		this.lowerBound = lowerBound;
 		this.upperBound = upperBound;
+		this.setUI(new RangeSliderUI(this));
 	}
 	
 	/**
