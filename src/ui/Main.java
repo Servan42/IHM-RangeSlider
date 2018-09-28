@@ -33,7 +33,8 @@ public class Main {
 		label.setText("Current value :");
 
 		try {
-			RangeSlider slider = new RangeSlider(40, 30, 10, 20);
+			RangeSlider slider = new RangeSlider(0, 30, 10, 20);
+			slider.setValue(0);
 
 			slider.setPaintTicks(true);
 			slider.setPaintLabels(true);
