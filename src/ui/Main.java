@@ -34,6 +34,14 @@ public class Main {
 			
 			try {
 				RangeSlider slider = new RangeSlider(0,30,10,20);
+				
+				slider.setPaintTicks(true);
+
+			    slider.setPaintLabels(true);
+
+			    slider.setMinorTickSpacing(10);
+
+			    slider.setMajorTickSpacing(20);
 				slider.addChangeListener(new ChangeListener() {
 					
 					public void stateChanged(ChangeEvent e) {
