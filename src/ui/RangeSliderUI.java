@@ -11,7 +11,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicSliderUI;
-import javax.swing.plaf.basic.BasicSliderUI.TrackListener;
 
 public class RangeSliderUI extends BasicSliderUI {
 	private enum State { IDLE, HOLD, DRAG }
@@ -89,7 +88,100 @@ public class RangeSliderUI extends BasicSliderUI {
     	setMinThumbLocation(x+5, y);
     }
     
+
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @Override
+    protected TrackListener createTrackListener(JSlider slider) {
+        return new Handler();
+    }
+    
+    
+    public class Handler extends TrackListener {
+    	
+    	
+    	private State state = State.IDLE;
+    	private RangeSlider rangeSlider;
+    	private boolean heldBound; // true = max, false = min
+    	
+    	
+    	@Override
+    	public void mouseReleased(MouseEvent e) {
+    		switch(state) {
+    		case HOLD:
+    			System.out.println("HOLD+RELEASED");
+				state = State.IDLE;
+				break;
+    		case DRAG:
+    			System.out.println("DRAG+RELEASED");
+    			state = State.IDLE;
+				break;
+			default:;
+    		}
+    	}
+    	
+    	@Override
+    	public void mouseMoved(MouseEvent e) {
+    		switch(state) {
+    		case HOLD:
+    			System.out.println("HOLD+MOVED");
+    			// BOUGER BORNE SAISIE + VALEUR
+				state = State.DRAG;
+    			break;
+    		case DRAG:
+    			System.out.println("DRAG+MOVED");
+    			// BOUGER BORNE SAISIE + VALEUR
+    			break;
+    		default:;
+    		}
+    	}
+    	
+    	@Override
+    	public void mousePressed(MouseEvent e) {
+    		switch(state) {
+    		case IDLE:
+    			System.out.println("IDLE+PRESSED");
+    			// TP BORNE CORRESPONDANTE + VALEUR
+				// ASSIGNER BORNE SAISIE
+				state = State.HOLD;
+				break;
+			default:;
+    		}
+    	}
+    	
+    	@Override
+    	public void mouseDragged(MouseEvent e) {
+    		mouseMoved(e);
+    	}
+    	    	
+    }
     
     
 }
