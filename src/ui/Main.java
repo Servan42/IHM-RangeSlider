@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -26,38 +25,32 @@ public class Main {
 			}
 		});
 
-			JPanel p = new JPanel();
-			//p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-			p.setLayout(new BorderLayout());
-			JLabel label = new JLabel("Test");
-			p.add(label, BorderLayout.SOUTH);
-			label.setText("Current value :");
-			
-			try {
-				RangeSlider slider = new RangeSlider(0,30,10,20);
-				
-				slider.setPaintTicks(true);
-			    slider.setPaintLabels(true);
-			    slider.setMinorTickSpacing(1);
-			    slider.setMajorTickSpacing(5);
-				slider.addChangeListener(new ChangeListener() {
-					
-					public void stateChanged(ChangeEvent e) {
-						label.setText("Current value : " + new Integer(slider.getValue()).toString());
-						
-					}
-				});
-				
-				p.add(slider);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			frame.getContentPane().add(p);
+		JPanel p = new JPanel();
+		// p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+		p.setLayout(new BorderLayout());
+		JLabel label = new JLabel("Test");
+		p.add(label, BorderLayout.SOUTH);
+		label.setText("Current value :");
 
-		
-		
+		try {
+			RangeSlider slider = new RangeSlider(0, 30, 10, 20);
+			slider.setValue(0);
+
+			slider.setPaintTicks(true);
+			slider.setPaintLabels(true);
+			slider.setMinorTickSpacing(1);
+			slider.setMajorTickSpacing(5);
+			slider.addChangeListener(new ChangeListener() {
+				public void stateChanged(ChangeEvent e) {
+					label.setText("Current value : " + new Integer(slider.getValue()).toString());
+				}
+			});
+			p.add(slider);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+		frame.getContentPane().add(p);
 		frame.setVisible(true);
 	}
 }
