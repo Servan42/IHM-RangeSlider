@@ -7,14 +7,11 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.Random;
 
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicSliderUI;
-
-import ui.RangeSliderUI.EventHandler;
 
 public class RangeSliderUI extends BasicSliderUI {
 	private enum State {
@@ -39,13 +36,14 @@ public class RangeSliderUI extends BasicSliderUI {
 	}
 
 	private void Update() {
-		System.out.println("NOT IMPLEMENTED YET - ui.RangeSliderUI.Update()");
+		System.out.println("ui.RangeSliderUI.Update() - NOT IMPLEMENTED YET");
 	}
 
 	@Override
 	public void paintThumb(Graphics g) {
 		super.paintThumb(g);
-		if(Main.debug) System.out.println("-> On passe dans la methode RangeSliderUI.paintThumb()");
+		if (Main.debug)
+			System.out.println("-> On passe dans la methode RangeSliderUI.paintThumb()");
 
 		Rectangle knobBounds = minThumb;
 		int w = knobBounds.width;
@@ -112,10 +110,11 @@ public class RangeSliderUI extends BasicSliderUI {
 					System.out.println("IDLE+PRESSED");
 				// TP BORNE CORRESPONDANTE + VALEUR
 				int valueClicked = valueForXPosition(arg0.getX());
-				if(Main.debug) System.out.println("valueClicked : " + valueClicked);
+				if (Main.debug)
+					System.out.println("EventHandler.mousePressed.valueClicked : " + valueClicked);
 				heldCursor = Math.abs(valueClicked - rs.getUpperBound()) < Math.abs(valueClicked - rs.getLowerBound());
 				// ASSIGNER BORNE SAISIE
-				if(heldCursor)
+				if (heldCursor)
 					rs.setUpperBound(valueClicked);
 				else
 					rs.setLowerBound(valueClicked);

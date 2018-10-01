@@ -2,18 +2,16 @@ package ui;
 
 import javax.swing.JSlider;
 
-import ui.RangeSliderUI.EventHandler;
-
 public class RangeSlider extends JSlider implements _RangeSlider {
 
 	private int max;
 	private int min;
 	private int lowerBound;
 	private int upperBound;
-	
-	public RangeSlider(int min, int max, int lowerBound, int upperBound) throws Exception{
+
+	public RangeSlider(int min, int max, int lowerBound, int upperBound) throws Exception {
 		super();
-		if(min > max || upperBound > max || upperBound < min){
+		if (min > max || upperBound > max || upperBound < min) {
 			throw new Exception("ERROR : Incorrect Slider values in constructor.");
 		}
 		this.max = max;
@@ -24,7 +22,7 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 		removeMouseMotionListener(getMouseMotionListeners()[1]);
 		removeMouseListener(getMouseListeners()[1]);
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -51,7 +49,7 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 	}
 
 	@Override
-	public void setMaximum(int max){
+	public void setMaximum(int max) {
 		if (max >= min)
 			this.max = max;
 		if (max < upperBound)
@@ -63,7 +61,7 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 	}
 
 	@Override
-	public void setMinimum(int min){
+	public void setMinimum(int min) {
 		if (min <= max)
 			this.min = min;
 		if (min > upperBound)

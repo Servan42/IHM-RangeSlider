@@ -35,7 +35,7 @@ public class Main {
 		p.setLayout(new BorderLayout());
 		JLabel label = new JLabel("Test");
 		p.add(label, BorderLayout.SOUTH);
-		label.setText("Current value :");
+		label.setText("Current value");
 
 		try {
 			RangeSlider slider = new RangeSlider(0, 30, 10, 20);
@@ -47,7 +47,7 @@ public class Main {
 			slider.setMajorTickSpacing(5);
 			slider.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					label.setText("min/low/up/max: " + slider.getMinimum() + "/" + slider.getLowerBound() + "/" + slider.getUpperBound() + "/" + slider.getMaximum());
+					label.setText("min/low/up/max: " + slider.getMinimum() + " / " + slider.getLowerBound() + " / " + slider.getUpperBound() + " / " + slider.getMaximum());
 				}
 			});
 			
