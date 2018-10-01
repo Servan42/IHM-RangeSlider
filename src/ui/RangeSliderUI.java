@@ -19,12 +19,9 @@ public class RangeSliderUI extends BasicSliderUI {
 	}
 
 	private RangeSlider rs;
-	private ChangeListener listener = new ChangeListener() {
-		public void stateChanged(ChangeEvent ce) {
-			Update();
-		}
-	};
-	private Rectangle minThumb;
+
+	private Rectangle lowerThumb;
+	private Rectangle upperThumb;
 
 	public RangeSliderUI(RangeSlider arg0) {
 		super(arg0);
@@ -32,20 +29,33 @@ public class RangeSliderUI extends BasicSliderUI {
 		EventHandler handler = new EventHandler();
 		rs.addMouseListener(handler);
 		rs.addMouseMotionListener(handler);
-		minThumb = new Rectangle(10, 20);
+		lowerThumb = new Rectangle(10, 20);
+		upperThumb = new Rectangle(10, 20);
 	}
 
-	private void Update() {
-		System.out.println("ui.RangeSliderUI.Update() - NOT IMPLEMENTED YET");
+	@Override
+	protected void calculateThumbLocation() {
+		int lowerPosition = xPositionForValue(rs.getUpperBound());
+		int upperPosition = xPositionForValue(rs.getLowerBound());
+
+		lowerThumb.x = lowerPosition - (lowerThumb.width / 2);
+		lowerThumb.y = trackRect.y;
+
+		upperThumb.x = upperPosition - (upperThumb.width / 2);
+		upperThumb.y = trackRect.y;
 	}
 
 	@Override
 	public void paintThumb(Graphics g) {
-		super.paintThumb(g);
 		if (Main.debug)
 			System.out.println("-> On passe dans la methode RangeSliderUI.paintThumb()");
 
-		Rectangle knobBounds = minThumb;
+		paintOneThumb(g, lowerThumb);
+		paintOneThumb(g, upperThumb);
+	}
+
+	private void paintOneThumb(Graphics g, Rectangle thumb) {
+		Rectangle knobBounds = thumb;
 		int w = knobBounds.width;
 		int h = knobBounds.height;
 
@@ -79,28 +89,41 @@ public class RangeSliderUI extends BasicSliderUI {
 		g.translate(-knobBounds.x, -knobBounds.y);
 	}
 
-	// Used exclusively by setThumbLocation()
+	// Used exclusively by setXThumbLocation()
 	private static Rectangle unionRect2 = new Rectangle();
+	private static Rectangle unionRect3 = new Rectangle();
 
-	public void setMinThumbLocation(int x, int y) {
-		unionRect2.setBounds(minThumb);
+	public void setLowerThumbLocation(int x, int y) {
+		unionRect2.setBounds(lowerThumb);
 
-		minThumb.setLocation(x, y);
+		lowerThumb.setLocation(x, y);
 
-		SwingUtilities.computeUnion(minThumb.x, minThumb.y, minThumb.width, minThumb.height, unionRect2);
+		SwingUtilities.computeUnion(lowerThumb.x, lowerThumb.y, lowerThumb.width, lowerThumb.height, unionRect2);
 		slider.repaint(unionRect2.x, unionRect2.y, unionRect2.width, unionRect2.height);
 	}
 
-	@Override
-	public void setThumbLocation(int x, int y) {
-		super.setThumbLocation(x, y);
-		setMinThumbLocation(x + 5, y);
+	public void setUpperThumbLocation(int x, int y) {
+		unionRect3.setBounds(upperThumb);
+
+		upperThumb.setLocation(x, y);
+
+		SwingUtilities.computeUnion(upperThumb.x, upperThumb.y, upperThumb.width, upperThumb.height, unionRect3);
+		slider.repaint(unionRect3.x, unionRect3.y, unionRect3.width, unionRect3.height);
 	}
 
 	public class EventHandler implements MouseListener, MouseMotionListener {
 
 		private State state = State.IDLE;
 		private boolean heldCursor; // True: Upper Cursor | False: Lower Cursor.
+
+		public EventHandler() {
+			rs.addChangeListener(new ChangeListener() {
+				public void stateChanged(ChangeEvent e) {
+					calculateThumbLocation();
+					rs.repaint();
+				}
+			});
+		}
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
