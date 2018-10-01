@@ -2,6 +2,8 @@ package ui;
 
 import javax.swing.JSlider;
 
+import ui.RangeSliderUI.EventHandler;
+
 public class RangeSlider extends JSlider implements _RangeSlider {
 
 	private int max;
@@ -10,6 +12,7 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 	private int upperBound;
 	
 	public RangeSlider(int min, int max, int lowerBound, int upperBound) throws Exception{
+		super();
 		if(min > max || upperBound > max || upperBound < min){
 			throw new Exception("ERROR : Incorrect Slider values in constructor.");
 		}
@@ -18,6 +21,8 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 		this.lowerBound = lowerBound;
 		this.upperBound = upperBound;
 		this.setUI(new RangeSliderUI(this));
+		removeMouseMotionListener(getMouseMotionListeners()[1]);
+		removeMouseListener(getMouseListeners()[1]);
 	}
 	
 	/**
@@ -53,6 +58,8 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 			upperBound = max;
 		if (max < lowerBound)
 			lowerBound = max;
+		fireStateChanged();
+		repaint();
 	}
 
 	@Override
@@ -63,6 +70,8 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 			upperBound = min;
 		if (min > lowerBound)
 			lowerBound = min;
+		fireStateChanged();
+		repaint();
 	}
 
 	@Override
@@ -73,6 +82,8 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 			this.lowerBound = upperBound;
 		else
 			this.lowerBound = lowerBound;
+		fireStateChanged();
+		repaint();
 	}
 
 	@Override
@@ -83,6 +94,8 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 			this.upperBound = lowerBound;
 		else
 			this.upperBound = upperBound;
+		fireStateChanged();
+		repaint();
 	}
 
 }

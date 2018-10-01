@@ -16,6 +16,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class Main {
+	
+	public static final boolean debug = true;
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
@@ -45,15 +47,10 @@ public class Main {
 			slider.setMajorTickSpacing(5);
 			slider.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					label.setText("Current value : " + new Integer(slider.getValue()).toString());
+					label.setText("min/low/up/max: " + slider.getMinimum() + "/" + slider.getLowerBound() + "/" + slider.getUpperBound() + "/" + slider.getMaximum());
 				}
 			});
 			
-			slider.removeMouseMotionListener(slider.getMouseMotionListeners()[0]);
-			slider.removeMouseListener(slider.getMouseListeners()[0]);
-			EventHandler handler = new EventHandler();
-			slider.addMouseListener(handler);
-			slider.addMouseMotionListener(handler);
 			p.add(slider);
 		} catch (Exception e1) {
 			e1.printStackTrace();
