@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -89,6 +90,24 @@ public class RangeSliderUI extends BasicSliderUI {
 		g.translate(-knobBounds.x, -knobBounds.y);
 	}
 
+	@Override
+	public void calculateTrackRect() {
+		// YO SERVAN, LA-DEDANS çA CALCULE LA TAILLE DE LA TRACK, BON COURAGE
+		////
+		////
+		////
+		////
+		// STP LIS çA, ET SI TU PREFERES ON PEUT Y TRAVAILLER CE SOIR
+		
+		int centerSpacing = thumbRect.height;
+        if ( slider.getPaintTicks() ) centerSpacing += getTickLength();
+        if ( slider.getPaintLabels() ) centerSpacing += getHeightOfTallestLabel();
+        trackRect.x = contentRect.x + trackBuffer;
+        trackRect.y = contentRect.y + (contentRect.height - centerSpacing - 1)/2;
+        trackRect.width = contentRect.width - (trackBuffer * 2);
+        trackRect.height = thumbRect.height;
+	}
+	
 	// Used exclusively by setXThumbLocation()
 	private static Rectangle unionRect2 = new Rectangle();
 	private static Rectangle unionRect3 = new Rectangle();
@@ -180,11 +199,16 @@ public class RangeSliderUI extends BasicSliderUI {
 					System.out.println("HOLD+MOVED");
 				// BOUGER BORNE SAISIE + VALEUR
 				state = State.DRAG;
-				break;
+				//break;
 			case DRAG:
 				if (Main.debug)
 					System.out.println("DRAG+MOVED");
 				// BOUGER BORNE SAISIE + VALEUR
+				int mousePos = valueForXPosition(e.getX());
+				if (heldCursor)
+					rs.setUpperBound(mousePos);
+				else
+					rs.setLowerBound(mousePos);
 				break;
 			default:
 				;

@@ -1,19 +1,20 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import fc.Home;
 
 public class Main {
 	
@@ -30,33 +31,51 @@ public class Main {
 			}
 		});
 
-		JPanel p = new JPanel();
-		// p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-		p.setLayout(new BorderLayout());
+		// CREATING THE OBJECTS
 		JLabel label = new JLabel("Test");
-		p.add(label, BorderLayout.SOUTH);
 		label.setText("Current value");
-
 		try {
-			RangeSlider slider = new RangeSlider(0, 30, 10, 20);
-			slider.setValue(0);
-
-			slider.setPaintTicks(true);
-			slider.setPaintLabels(true);
-			slider.setMinorTickSpacing(1);
-			slider.setMajorTickSpacing(5);
-			slider.addChangeListener(new ChangeListener() {
+			RangeSlider slider1 = new RangeSlider(0, 2, 8, 10);
+			slider1.setPreferredSize(new Dimension(10, 10));
+			slider1.setPaintTicks(true);
+			slider1.setPaintLabels(true);
+			slider1.setMinorTickSpacing(1);
+			slider1.setMajorTickSpacing(5);
+			slider1.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					label.setText("min/low/up/max: " + slider.getMinimum() + " / " + slider.getLowerBound() + " / " + slider.getUpperBound() + " / " + slider.getMaximum());
+					label.setText("min/low/up/max: " + slider1.getMinimum() + " / " + slider1.getLowerBound() + " / " + slider1.getUpperBound() + " / " + slider1.getMaximum());
 				}
 			});
 			
-			p.add(slider);
+			RangeSlider slider2 = new RangeSlider(0, 100000, 900000, 1000000);
+			slider2.setPaintTicks(true);
+			slider2.setPaintLabels(true);
+			slider2.setMinorTickSpacing(100000);
+			slider2.setMajorTickSpacing(500000);
+			
+		// ORGANIZING THE INTERFACE
+		JPanel sliderPanel = new JPanel();
+		sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
+		
+		JPanel mainBP = new JPanel();
+		mainBP.setLayout(new BorderLayout());
+		
+		sliderPanel.add(slider1);
+		//sliderPanel.add(Box.createRigidArea(new Dimension(10,5)));
+		sliderPanel.add(slider2);
+		mainBP.add(label, BorderLayout.SOUTH);
+		mainBP.add(sliderPanel, BorderLayout.LINE_END);
+
+		frame.getContentPane().add(mainBP);
+		frame.setVisible(true);
+		
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
-		frame.getContentPane().add(p);
-		frame.setVisible(true);
+		
+		ArrayList<Home> homeList = new ArrayList<Home>();
+		for(int i = 0; i < 100; i++) {
+			homeList.add(new Home());
+		}
 	}
 }
