@@ -19,6 +19,8 @@ public class RangeSlider extends JSlider implements _RangeSlider {
 		this.lowerBound = lowerBound;
 		this.upperBound = upperBound;
 		this.setUI(new RangeSliderUI(this));
+		this.setPaintLabels(true);
+		this.setPaintTicks(true);
 		removeMouseMotionListener(getMouseMotionListeners()[1]);
 		removeMouseListener(getMouseListeners()[1]);
 	}

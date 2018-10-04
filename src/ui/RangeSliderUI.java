@@ -47,9 +47,6 @@ public class RangeSliderUI extends BasicSliderUI {
 
 	@Override
 	public void paintThumb(Graphics g) {
-		if (Main.debug)
-			System.out.println("-> On passe dans la methode RangeSliderUI.paintThumb()");
-
 		paintOneThumb(g, lowerThumb);
 		paintOneThumb(g, upperThumb);
 	}
@@ -142,8 +139,6 @@ public class RangeSliderUI extends BasicSliderUI {
 		public void mousePressed(MouseEvent arg0) {
 			switch (state) {
 			case IDLE:
-				if (Main.debug)
-					System.out.println("IDLE+PRESSED");
 				// TP BORNE CORRESPONDANTE + VALEUR
 				int valueClicked = valueForXPosition(arg0.getX());
 				if (Main.debug)
@@ -166,13 +161,9 @@ public class RangeSliderUI extends BasicSliderUI {
 		public void mouseReleased(MouseEvent arg0) {
 			switch (state) {
 			case HOLD:
-				if (Main.debug)
-					System.out.println("HOLD+RELEASED");
 				state = State.IDLE;
 				break;
 			case DRAG:
-				if (Main.debug)
-					System.out.println("DRAG+RELEASED");
 				state = State.IDLE;
 				break;
 			default:
@@ -189,14 +180,10 @@ public class RangeSliderUI extends BasicSliderUI {
 		public void mouseMoved(MouseEvent e) {
 			switch (state) {
 			case HOLD:
-				if (Main.debug)
-					System.out.println("HOLD+MOVED");
 				// BOUGER BORNE SAISIE + VALEUR
 				state = State.DRAG;
 				// break;
 			case DRAG:
-				if (Main.debug)
-					System.out.println("DRAG+MOVED");
 				// BOUGER BORNE SAISIE + VALEUR
 				int mousePos = valueForXPosition(e.getX());
 				if (heldCursor)
