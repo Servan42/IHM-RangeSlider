@@ -14,7 +14,7 @@ public class Map extends JPanel {
 	public Map(ArrayList<Home> quartier) {
 		this.quartier = quartier;
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(0, 0, 0));
