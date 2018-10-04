@@ -48,9 +48,6 @@ public class RangeSliderUI extends BasicSliderUI {
 
 	@Override
 	public void paintThumb(Graphics g) {
-		if (Main.debug)
-			System.out.println("-> On passe dans la methode RangeSliderUI.paintThumb()");
-
 		paintOneThumb(g, lowerThumb);
 		paintOneThumb(g, upperThumb);
 	}
@@ -93,14 +90,16 @@ public class RangeSliderUI extends BasicSliderUI {
 	@Override
 	public void calculateTrackRect() {
 		int centerSpacing = thumbRect.height;
-        if ( slider.getPaintTicks() ) centerSpacing += getTickLength();
-        if ( slider.getPaintLabels() ) centerSpacing += getHeightOfTallestLabel();
-        trackRect.x = contentRect.x + thumbRect.width;
-        trackRect.y = contentRect.y + (contentRect.height - centerSpacing - 1)/2;
-        trackRect.width = contentRect.width - (thumbRect.width * 2);
-        trackRect.height = thumbRect.height;
+		if (slider.getPaintTicks())
+			centerSpacing += getTickLength();
+		if (slider.getPaintLabels())
+			centerSpacing += getHeightOfTallestLabel();
+		trackRect.x = contentRect.x + thumbRect.width;
+		trackRect.y = contentRect.y + (contentRect.height - centerSpacing - 1) / 2;
+		trackRect.width = contentRect.width - (thumbRect.width * 2);
+		trackRect.height = thumbRect.height;
 	}
-	
+
 	// Used exclusively by setXThumbLocation()
 	private static Rectangle unionRect2 = new Rectangle();
 	private static Rectangle unionRect3 = new Rectangle();
@@ -192,7 +191,7 @@ public class RangeSliderUI extends BasicSliderUI {
 					System.out.println("HOLD+MOVED");
 				// BOUGER BORNE SAISIE + VALEUR
 				state = State.DRAG;
-				//break;
+				// break;
 			case DRAG:
 				if (Main.debug)
 					System.out.println("DRAG+MOVED");

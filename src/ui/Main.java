@@ -17,7 +17,7 @@ import javax.swing.event.ChangeListener;
 import fc.Home;
 
 public class Main {
-	
+
 	public static final boolean debug = true;
 
 	public static void main(String[] args) {
@@ -33,51 +33,48 @@ public class Main {
 		});
 
 		// CREATING THE OBJECTS
+		ArrayList<Home> homeList = new ArrayList<Home>();
+		for (int i = 0; i < 100; i++) {
+			homeList.add(new Home());
+		}
 		JLabel label = new JLabel("Test");
 		label.setText("Current value");
 		try {
-			RangeSlider slider1 = new RangeSlider(0, 2, 8, 10);
-			slider1.setPreferredSize(new Dimension(10, 10));
-			slider1.setPaintTicks(true);
-			slider1.setPaintLabels(true);
-			slider1.setMinorTickSpacing(1);
-			slider1.setMajorTickSpacing(5);
-			slider1.addChangeListener(new ChangeListener() {
+			RangeSlider sliderRoom = new RangeSlider(0, 2, 8, 10);
+			sliderRoom.setMinorTickSpacing(1);
+			sliderRoom.setMajorTickSpacing(5);
+			sliderRoom.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					label.setText("min/low/up/max: " + slider1.getMinimum() + " / " + slider1.getLowerBound() + " / " + slider1.getUpperBound() + " / " + slider1.getMaximum());
+					label.setText("min/low/up/max: " + sliderRoom.getMinimum() + " / " + sliderRoom.getLowerBound()
+							+ " / " + sliderRoom.getUpperBound() + " / " + sliderRoom.getMaximum());
 				}
 			});
-			
-			RangeSlider slider2 = new RangeSlider(0, 100000, 900000, 1000000);
-			slider2.setPaintTicks(true);
-			slider2.setPaintLabels(true);
-			slider2.setMinorTickSpacing(100000);
-			slider2.setMajorTickSpacing(500000);
-			
-		// ORGANIZING THE INTERFACE
-		JPanel sliderPanel = new JPanel();
-		sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
-		
-		JPanel mainBP = new JPanel();
-		mainBP.setLayout(new BorderLayout());
-		
-		sliderPanel.add(slider1);
-		//sliderPanel.add(Box.createRigidArea(new Dimension(10,5)));
-		sliderPanel.add(slider2);
-		mainBP.add(label, BorderLayout.SOUTH);
-		mainBP.add(sliderPanel, BorderLayout.LINE_END);
-		mainBP.add(new Map());
 
-		frame.getContentPane().add(mainBP);
-		frame.setVisible(true);
-		
+			RangeSlider sliderPrice = new RangeSlider(0, 100000, 900000, 1000000);
+			sliderPrice.setMinorTickSpacing(100000);
+			sliderPrice.setMajorTickSpacing(500000);
+
+			Map map = new Map(homeList, sliderRoom, sliderPrice);
+
+			// ORGANIZING THE INTERFACE
+			JPanel sliderPanel = new JPanel();
+			sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
+
+			JPanel mainBP = new JPanel();
+			mainBP.setLayout(new BorderLayout());
+
+			sliderPanel.add(sliderRoom);
+			// sliderPanel.add(Box.createRigidArea(new Dimension(10,5)));
+			sliderPanel.add(sliderPrice);
+			mainBP.add(label, BorderLayout.SOUTH);
+			mainBP.add(sliderPanel, BorderLayout.LINE_END);
+			mainBP.add(map);
+
+			frame.getContentPane().add(mainBP);
+			frame.setVisible(true);
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
-		}
-		
-		ArrayList<Home> homeList = new ArrayList<Home>();
-		for(int i = 0; i < 100; i++) {
-			homeList.add(new Home());
 		}
 	}
 }
