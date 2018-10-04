@@ -70,7 +70,7 @@ public class Main {
 			mainBP.add(sliderPanel, BorderLayout.LINE_END);
 
 			for (int i = 0; i < 100; i++) {
-				homeList.add(new Home());
+				homeList.add(new Home(perimetre));
 			}
 			mainBP.add(new Map(homeList));
 
