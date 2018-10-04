@@ -22,8 +22,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
+		frame.setResizable(false);
 		frame.setTitle("RangeSlider");
-		frame.setSize(500, 100);
+		frame.setSize(800, 600);
 
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -65,6 +66,7 @@ public class Main {
 		sliderPanel.add(slider2);
 		mainBP.add(label, BorderLayout.SOUTH);
 		mainBP.add(sliderPanel, BorderLayout.LINE_END);
+		mainBP.add(new Map());
 
 		frame.getContentPane().add(mainBP);
 		frame.setVisible(true);
