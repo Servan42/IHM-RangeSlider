@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.Dimension;
+
 import javax.swing.JSlider;
 
 public class RangeSlider extends JSlider implements _RangeSlider {

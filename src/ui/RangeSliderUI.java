@@ -143,7 +143,11 @@ public class RangeSliderUI extends BasicSliderUI {
 				int valueClicked = valueForXPosition(arg0.getX());
 				if (Main.debug)
 					System.out.println("EventHandler.mousePressed.valueClicked : " + valueClicked);
-				heldCursor = Math.abs(valueClicked - rs.getUpperBound()) < Math.abs(valueClicked - rs.getLowerBound());
+				if(rs.getUpperBound() == rs.getLowerBound()) {
+					heldCursor = rs.getUpperBound() < valueClicked;
+				} else {
+					heldCursor = Math.abs(valueClicked - rs.getUpperBound()) < Math.abs(valueClicked - rs.getLowerBound());
+				}
 				// ASSIGNER BORNE SAISIE
 				if (heldCursor)
 					rs.setUpperBound(valueClicked);

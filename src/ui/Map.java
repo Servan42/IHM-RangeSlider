@@ -42,10 +42,10 @@ public class Map extends JPanel {
 		if (Main.debug)
 			System.out.println("-> On passe dans la methode Map.paintComponent().");
 
-		g.setColor(new Color(0, 0, 0));
+		g.setColor(new Color(4,139,34));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-		g.setColor(new Color(255, 0, 0));
+		g.setColor(new Color(40,20,10));
 		for (Home maison : quartier) {
 			if (maison.getRoomNumber() < sliderRoom.getLowerBound()
 					|| maison.getRoomNumber() > sliderRoom.getUpperBound()
