@@ -6,7 +6,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,8 +16,10 @@ import javax.swing.event.ChangeListener;
 import fc.Home;
 
 public class Main {
-	
+
 	public static final boolean debug = true;
+	public static int perimetre = 500;
+	private static ArrayList<Home> homeList = new ArrayList<Home>();
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
@@ -44,40 +45,41 @@ public class Main {
 			slider1.setMajorTickSpacing(5);
 			slider1.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					label.setText("min/low/up/max: " + slider1.getMinimum() + " / " + slider1.getLowerBound() + " / " + slider1.getUpperBound() + " / " + slider1.getMaximum());
+					label.setText("min/low/up/max: " + slider1.getMinimum() + " / " + slider1.getLowerBound() + " / "
+							+ slider1.getUpperBound() + " / " + slider1.getMaximum());
 				}
 			});
-			
+
 			RangeSlider slider2 = new RangeSlider(0, 100000, 900000, 1000000);
 			slider2.setPaintTicks(true);
 			slider2.setPaintLabels(true);
 			slider2.setMinorTickSpacing(100000);
 			slider2.setMajorTickSpacing(500000);
-			
-		// ORGANIZING THE INTERFACE
-		JPanel sliderPanel = new JPanel();
-		sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
-		
-		JPanel mainBP = new JPanel();
-		mainBP.setLayout(new BorderLayout());
-		
-		sliderPanel.add(slider1);
-		//sliderPanel.add(Box.createRigidArea(new Dimension(10,5)));
-		sliderPanel.add(slider2);
-		mainBP.add(label, BorderLayout.SOUTH);
-		mainBP.add(sliderPanel, BorderLayout.LINE_END);
-		mainBP.add(new Map());
 
-		frame.getContentPane().add(mainBP);
-		frame.setVisible(true);
-		
+			// ORGANIZING THE INTERFACE
+			JPanel sliderPanel = new JPanel();
+			sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
+
+			JPanel mainBP = new JPanel();
+			mainBP.setLayout(new BorderLayout());
+
+			sliderPanel.add(slider1);
+			sliderPanel.add(slider2);
+
+			mainBP.add(label, BorderLayout.SOUTH);
+			mainBP.add(sliderPanel, BorderLayout.LINE_END);
+
+			for (int i = 0; i < 100; i++) {
+				homeList.add(new Home());
+			}
+			mainBP.add(new Map(homeList));
+
+			frame.getContentPane().add(mainBP);
+			frame.setVisible(true);
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
-		ArrayList<Home> homeList = new ArrayList<Home>();
-		for(int i = 0; i < 100; i++) {
-			homeList.add(new Home());
-		}
+
 	}
 }

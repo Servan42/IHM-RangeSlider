@@ -6,9 +6,11 @@ public class Home {
 	private int posX;
 	private int posY;
 	
-	public Home() {
-		roomNumber = (int)(Math.random()*10);
+	public Home(int perimetre) {
+		roomNumber = (int)(Math.random()*10) + 1;
 		price = Math.random()*950000.0 + 50000.0;
+		posX = (int)Math.random()*(perimetre + 1);
+		posX = (int)Math.random()*(perimetre + 1);
 	}
 	
 	public int getRoomNumber() {
