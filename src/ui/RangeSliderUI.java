@@ -92,19 +92,12 @@ public class RangeSliderUI extends BasicSliderUI {
 
 	@Override
 	public void calculateTrackRect() {
-		// YO SERVAN, LA-DEDANS çA CALCULE LA TAILLE DE LA TRACK, BON COURAGE
-		////
-		////
-		////
-		////
-		// STP LIS çA, ET SI TU PREFERES ON PEUT Y TRAVAILLER CE SOIR
-		
 		int centerSpacing = thumbRect.height;
         if ( slider.getPaintTicks() ) centerSpacing += getTickLength();
         if ( slider.getPaintLabels() ) centerSpacing += getHeightOfTallestLabel();
-        trackRect.x = contentRect.x + trackBuffer;
+        trackRect.x = contentRect.x + thumbRect.width;
         trackRect.y = contentRect.y + (contentRect.height - centerSpacing - 1)/2;
-        trackRect.width = contentRect.width - (trackBuffer * 2);
+        trackRect.width = contentRect.width - (thumbRect.width * 2);
         trackRect.height = thumbRect.height;
 	}
 	
